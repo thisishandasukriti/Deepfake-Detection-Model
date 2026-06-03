@@ -3,9 +3,9 @@ import os
 import numpy as np
 
 # 📌 Path to input videos
-video_folder = r"D:\DATASET FOR DFD\filtered_fake"
+video_folder = r"\filtered_fake"
 # 📌 Path to save frames
-frames_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/processed_frames"
+frames_folder = "/backend/data/processed_frames"
 
 os.makedirs(frames_folder, exist_ok=True)
 
