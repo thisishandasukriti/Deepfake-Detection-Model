@@ -1,15 +1,3 @@
-
-"""
-scripts/preprocess_dataset.py
-
-Runs:
- - filter tiny faces
- - resize images (default 224x224)
- - split dataset by video id into train/val/test (video-level split)
- - saves processed images to data/dataset/{train,val,test}/{real,fake}
- - writes data/dataset/mapping.csv with file, label, split, orig_path
-"""
-
 import os
 import random
 import csv
@@ -20,8 +8,8 @@ import concurrent.futures
 from multiprocessing import freeze_support, cpu_count
 
 # ==== USER ADJUSTABLE PARAMETERS ====
-CROPPED_FOLDER = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/cropped_faces"
-OUTPUT_DATASET = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/dataset"
+CROPPED_FOLDER = "/backend/data/cropped_faces"
+OUTPUT_DATASET = "/backend/data/dataset"
 TARGET_SIZE = (224, 224)
 MIN_FACE_SIZE = 30
 SPLIT = (0.80, 0.10, 0.10)
