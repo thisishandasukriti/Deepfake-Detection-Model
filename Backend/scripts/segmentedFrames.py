@@ -4,8 +4,8 @@ import random
 
 random.seed(42)
 
-video_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/raw_videos"
-frames_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/processed_frames"
+video_folder = "/backend/data_v2/raw_videos"
+frames_folder = "/backend/data_v2/processed_frames"
 
 os.makedirs(frames_folder, exist_ok=True)
 
