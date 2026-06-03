@@ -6,8 +6,8 @@ from collections import defaultdict
 from tqdm import tqdm
 
 # ================= SETTINGS =================
-DATASET_DIR = r"D:\DATASET FOR DFD\filtered_fake"
-DUP_DIR = r"D:\DATASET FOR DFD\HARD_DUPLICATES"
+DATASET_DIR = r"\filtered_fake"
+DUP_DIR = r"\HARD_DUPLICATES"
 
 FRAME_SAMPLES = 8
 SIM_THRESHOLD = 0.92
