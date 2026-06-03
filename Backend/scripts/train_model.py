@@ -13,7 +13,7 @@ import multiprocessing
 def main():
 
     # ================== SETTINGS ==================
-    DATASET_DIR = "data_v2/dataset"
+    DATASET_DIR = "data/dataset"
     BATCH_SIZE = 64
     NUM_EPOCHS = 8
     LEARNING_RATE = 7e-5   # 🔥 slightly reduced
