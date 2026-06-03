@@ -4,9 +4,9 @@ import shutil
 from collections import defaultdict
 
 # ================= SETTINGS =================
-DATASET_DIR = r"D:\DATASET FOR DFD\fake"
-UNIQUE_DIR = r"D:\DATASET FOR DFD\filtered_fake"
-DUPLICATE_DIR = r"D:\DATASET FOR DFD\DFD_DUPLICATES"
+DATASET_DIR = r"\fake"
+UNIQUE_DIR = r"\filtered_fake"
+DUPLICATE_DIR = r"\DFD_DUPLICATES"
 
 DURATION_TOL = 1.0        # seconds
 SIZE_TOL_RATIO = 0.01     # 1%
