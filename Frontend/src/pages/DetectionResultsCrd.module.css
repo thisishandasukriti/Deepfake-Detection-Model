@@ -1,0 +1,61 @@
+.card {
+  margin-top: 30px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.timestamp {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+
+.verdictContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.verdictBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.confidenceBarContainer {
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.confidenceBar {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.modelBreakdown {
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
+
+.modelItem {
+  margin-bottom: 10px;
+}
+
+.modelBar {
+  height: 6px;
+  background: #6366f1;
+  border-radius: 999px;
+}
