@@ -2,9 +2,9 @@ import cv2
 import os
 
 # 📌 Path to input videos
-video_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/raw_videos"
+video_folder = "/backend/data/raw_videos"
 # 📌 Path to save frames
-frames_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/processed_frames"
+frames_folder = "/backend/data/processed_frames"
 
 # ✅ Create main frames folder if it doesn't exist
 os.makedirs(frames_folder, exist_ok=True)
