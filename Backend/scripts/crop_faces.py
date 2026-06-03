@@ -6,8 +6,8 @@ import time
 from multiprocessing import Pool, cpu_count
 
 # ================== PATHS ==================
-frames_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/processed_frames"
-faces_folder = "C:/Users/DELL/Desktop/Deepfake_App/backend/data_v2/cropped_faces"
+frames_folder = "/backend/data/processed_frames"
+faces_folder = "/backend/data/cropped_faces"
 
 # ================== SETUP ==================
 os.makedirs(faces_folder, exist_ok=True)
