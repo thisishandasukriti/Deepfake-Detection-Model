@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import numpy as np
 
 # ================== USER SETTINGS ==================
-DATASET_DIR = "data_v2/dataset"
+DATASET_DIR = "data/dataset"
 MODEL_PATH = "models/deepfake_model.pth"
 BATCH_SIZE = 32
 IMAGE_SIZE = 224
