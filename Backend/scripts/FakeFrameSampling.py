@@ -2,15 +2,15 @@ import cv2
 import os
 import numpy as np
 
-# 📌 Path to input videos
+# Path to input videos
 video_folder = r"\filtered_fake"
-# 📌 Path to save frames
+#  Path to save frames
 frames_folder = "/backend/data/processed_frames"
 
 os.makedirs(frames_folder, exist_ok=True)
 
-# 🔥 SETTINGS (UPDATED)
-MAX_FRAMES = 8   # ✅ changed from 15 → 8
+#  SETTINGS (UPDATED)
+MAX_FRAMES = 8   #  changed from 15 → 8
 RESIZE_DIM = (224, 224)
 
 def get_video_duration(cap):
@@ -34,24 +34,24 @@ for label in ["fake"]:
         cap = cv2.VideoCapture(video_path)
 
         if not cap.isOpened():
-            print(f"⚠️ Skipping corrupted video: {video_file}")
+            print(f" Skipping corrupted video: {video_file}")
             continue
 
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         if total_frames == 0:
-            print(f"⚠️ Skipping empty video: {video_file}")
+            print(f" Skipping empty video: {video_file}")
             cap.release()
             continue
 
         duration = get_video_duration(cap)
 
-        # 🔥 Optional: adjust for very short videos
+        # Optional: adjust for very short videos
         if duration < 5:
             num_samples = min(5, total_frames)
         else:
             num_samples = min(MAX_FRAMES, total_frames)
 
-        # ✅ EVENLY SPACED (better than previous formula)
+        #  EVENLY SPACED (better than previous formula)
         sample_indices = np.linspace(0, total_frames - 1, num_samples).astype(int)
 
         frame_count = 0
@@ -76,4 +76,4 @@ for label in ["fake"]:
         cap.release()
         print(f"{video_file}: {saved_count} frames extracted (duration: {round(duration,2)}s)")
 
-print("✅ Frame extraction complete.")
+print(" Frame extraction complete.")
