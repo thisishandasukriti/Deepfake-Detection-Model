@@ -52,7 +52,7 @@ def main():
         f for f in os.listdir(DATASET_DIR) if f.endswith(".mp4")
     ]
 
-    print(f"📦 Total videos: {len(video_files)}")
+    print(f"Total videos: {len(video_files)}")
 
     # Step 1: Group by (pair, scenario)
     groups = defaultdict(list)
@@ -65,7 +65,7 @@ def main():
     moved = 0
 
     for key, files in groups.items():
-        print(f"\n🔍 Processing group: {key} ({len(files)} videos)")
+        print(f"\n Processing group: {key} ({len(files)} videos)")
 
         selected = []
 
@@ -96,7 +96,7 @@ def main():
 
     print("\n================ RESULT ================")
     print(f"✔ Unique kept: {kept}")
-    print(f"📦 Moved to DFD_DUPLICATES: {moved}")
+    print(f" Moved to DFD_DUPLICATES: {moved}")
 
 
 if __name__ == "__main__":
