@@ -1,25 +1,24 @@
-✅ Epoch 1: Train Loss: 0.4108, Accuracy: 0.8634                                                                                                                                 
+ Epoch 1: Train Loss: 0.4108, Accuracy: 0.8634                                                                                                                                 
     Validation Loss: 0.3179, Accuracy: 0.9077
-🏆 New best model saved (epoch 1, val acc=0.9077)
+ New best model saved (epoch 1, val acc=0.9077)
 
-✅ Epoch 2: Train Loss: 0.3787, Accuracy: 0.8910                                                                                                                                 
+ Epoch 2: Train Loss: 0.3787, Accuracy: 0.8910                                                                                                                                 
     Validation Loss: 0.3186, Accuracy: 0.9077
-💾 Checkpoint saved: models/checkpoints\deepfake_model_epoch2_acc0.9077.pth
-🔓 Unfroze full model for fine-tuning
+ Checkpoint saved: models/checkpoints\deepfake_model_epoch2_acc0.9077.pth
+ Unfroze full model for fine-tuning
 
-✅ Epoch 3: Train Loss: 0.3076, Accuracy: 0.8902                                                                                                                                 
+ Epoch 3: Train Loss: 0.3076, Accuracy: 0.8902                                                                                                                                 
     Validation Loss: 0.2602, Accuracy: 0.9087
-💾 Checkpoint saved: models/checkpoints\deepfake_model_epoch3_acc0.9087.pth
-🏆 New best model saved (epoch 3, val acc=0.9087)
+ Checkpoint saved: models/checkpoints\deepfake_model_epoch3_acc0.9087.pth
+ New best model saved (epoch 3, val acc=0.9087)
 
-✅ Epoch 4: Train Loss: 0.2495, Accuracy: 0.9017                                                                                                                                 
+ Epoch 4: Train Loss: 0.2495, Accuracy: 0.9017                                                                                                                                 
     Validation Loss: 0.2444, Accuracy: 0.9092
-💾 Checkpoint saved: models/checkpoints\deepfake_model_epoch4_acc0.9092.pth
-🏆 New best model saved (epoch 4, val acc=0.9092)
+ Checkpoint saved: models/checkpoints\deepfake_model_epoch4_acc0.9092.pth New best model saved (epoch 4, val acc=0.9092)
 
-✅ Epoch 5: Train Loss: 0.2179, Accuracy: 0.9113                                                                                                                                 
+ Epoch 5: Train Loss: 0.2179, Accuracy: 0.9113                                                                                                                                 
     Validation Loss: 0.2285, Accuracy: 0.9166
-💾 Checkpoint saved: models/checkpoints\deepfake_model_epoch5_acc0.9166.pth
-🏆 New best model saved (epoch 5, val acc=0.9166)
+ Checkpoint saved: models/checkpoints\deepfake_model_epoch5_acc0.9166.pth
+ New best model saved (epoch 5, val acc=0.9166)
 Training complete. Best validation accuracy: 0.9166
-✅ Final best model saved to models/deepfake_model.pth
+ Final best model saved to models/deepfake_model.pth
