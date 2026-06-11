@@ -46,18 +46,18 @@ for label in ["real"]:
         cap = cv2.VideoCapture(video_path)
 
         if not cap.isOpened():
-            print(f"⚠️ Skipping corrupted video: {video_file}")
+            print(f" Skipping corrupted video: {video_file}")
             continue
 
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         if total_frames == 0:
-            print(f"⚠️ Skipping empty video: {video_file}")
+            print(f" Skipping empty video: {video_file}")
             cap.release()
             continue
 
         duration = get_video_duration(cap)
 
-        # 🔥 Adaptive parameters
+        #  Adaptive parameters
         MAX_FRAMES, NUM_SEGMENTS = get_extraction_params(duration)
         FRAMES_PER_SEGMENT = max(1, MAX_FRAMES // NUM_SEGMENTS)
 
@@ -65,7 +65,7 @@ for label in ["real"]:
 
         selected_indices = []
 
-        # 🔥 Segment-based sampling
+        #  Segment-based sampling
         for seg in range(NUM_SEGMENTS):
             start = seg * segment_size
             end = start + segment_size - 1
@@ -107,4 +107,4 @@ for label in ["real"]:
 
         print(f"{video_file}: {saved_count} frames extracted (duration: {round(duration,2)}s)")
 
-print("✅ Frame extraction complete.")
+print(" Frame extraction complete.")
