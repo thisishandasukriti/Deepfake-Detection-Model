@@ -86,7 +86,7 @@ def process_frame(args):
         cv2.imwrite(face_path, face)
         saved_faces += 1
 
-    return f"✅ {frame_file} → {saved_faces} face(s)"
+    return f" {frame_file} → {saved_faces} face(s)"
 
 # ================== TASKS ==================
 tasks = []
