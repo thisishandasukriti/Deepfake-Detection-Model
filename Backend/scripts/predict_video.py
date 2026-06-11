@@ -14,8 +14,8 @@ from mtcnn.mtcnn import MTCNN
 MODEL_PATH = "models/deepfake_model.pth"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 IMAGE_SIZE = 224
-MAX_FRAMES = 30          # 🔥 Limit frames processed
-MIN_CONFIDENCE = 0.90    # 🔥 Face confidence threshold
+MAX_FRAMES = 30          # Limit frames processed
+MIN_CONFIDENCE = 0.90    #  Face confidence threshold
 # =================================================
 
 # ================== MODEL LOADING ==================
@@ -48,10 +48,10 @@ def extract_faces_from_frame(frame_rgb, detector):
     except Exception:
         return []
 
-    # 🔥 Filter by confidence
+    # Filter by confidence
     results = [r for r in results if r['confidence'] >= MIN_CONFIDENCE]
 
-    # 🔥 Limit to most confident face only
+    #  Limit to most confident face only
     results = results[:1]
 
     crops = []
@@ -59,7 +59,7 @@ def extract_faces_from_frame(frame_rgb, detector):
         x, y, w, h = r['box']
         x, y = max(0, x), max(0, y)
 
-        # 🔥 Add padding for context (same as crop_faces.py)
+        #  Add padding for context (same as crop_faces.py)
         pad = int(0.15 * w)
         x1 = max(0, x - pad)
         y1 = max(0, y - pad)
@@ -74,27 +74,27 @@ def extract_faces_from_frame(frame_rgb, detector):
 # ================== PREDICTION ==================
 def predict_video(video_path):
     if not os.path.exists(video_path):
-        print(f"❌ Video not found: {video_path}")
+        print(f"Video not found: {video_path}")
         return
 
-    print(f"🎥 Processing video: {video_path}")
-    print(f"🖥️  Running on: {DEVICE}")
+    print(f" Processing video: {video_path}")
+    print(f"  Running on: {DEVICE}")
 
-    # 🔥 MTCNN instead of Haar Cascade
+    # MTCNN instead of Haar Cascade
     detector = MTCNN()
     model = load_model()
 
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        print("❌ Could not open video.")
+        print(" Could not open video.")
         return
 
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     if total_frames <= 0:
-        print("❌ Invalid or empty video.")
+        print(" Invalid or empty video.")
         return
 
-    # 🔥 Uniform sampling across video
+    #  Uniform sampling across video
     num_samples = min(MAX_FRAMES, total_frames) if total_frames > 0 else 1
     sample_indices = set(
         int(i * total_frames / num_samples) for i in range(num_samples)
@@ -130,7 +130,7 @@ def predict_video(video_path):
     cap.release()
 
     if not preds:
-        print("⚠️ No faces detected in video.")
+        print(" No faces detected in video.")
         return {
             "label": "NO_FACES_DETECTED",
             "confidence": 0.0
@@ -142,12 +142,12 @@ def predict_video(video_path):
     print(f"   Fake Prob : {avg_pred[0]:.4f}")
     print(f"   Real Prob : {avg_pred[1]:.4f}")
 
-    # 🔥 Safe label mapping
+    #  Safe label mapping
     CLASS_NAMES = ["fake", "real"]  
     label = CLASS_NAMES[np.argmax(avg_pred)].upper()
     confidence = float(max(avg_pred))
 
-    print(f"\n✅ Prediction Complete!")
+    print(f"\n Prediction Complete!")
     print(f"   Label     : {label}")
     print(f"   Confidence: {confidence:.4f}")
     print(f"   Frames used: {len(preds)}")
@@ -165,4 +165,4 @@ if __name__ == "__main__":
     video_path = sys.argv[1]
     result = predict_video(video_path)
     if result:
-        print(f"\n🔍 Final Result: {result['label']} ({result['confidence']*100:.2f}%)")
+        print(f"\n Final Result: {result['label']} ({result['confidence']*100:.2f}%)")
