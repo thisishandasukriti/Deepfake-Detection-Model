@@ -20,7 +20,7 @@ detector = None
 # ================== PARAMETERS ==================
 MAX_SIZE = 1080
 OUTPUT_SIZE = (224, 224)
-PADDING_RATIO = 0.20   # 🔥 safe padding (fixes tight crops)
+PADDING_RATIO = 0.20   #  safe padding (fixes tight crops)
 
 # ================== INIT ==================
 def init_worker():
@@ -35,7 +35,7 @@ def process_frame(args):
 
     image = cv2.imread(frame_path)
     if image is None:
-        return f"❌ Skipped: {frame_file}"
+        return f" Skipped: {frame_file}"
 
     # Resize large images (same as before)
     if max(image.shape[:2]) > MAX_SIZE:
@@ -100,7 +100,7 @@ for label in ["real", "fake"]:
             tasks.append((os.path.join(label_folder, frame_file), label))
 
 total_frames = len(tasks)
-print(f"📌 Total frames: {total_frames}")
+print(f" Total frames: {total_frames}")
 
 # ================== WORKERS ==================
 available_mem_gb = psutil.virtual_memory().available / (1024**3)
@@ -112,7 +112,7 @@ elif available_mem_gb < 8:
 else:
     NUM_WORKERS = min(8, cpu_count() - 1)
 
-print(f"🧠 Using {NUM_WORKERS} workers...\n")
+print(f" Using {NUM_WORKERS} workers...\n")
 
 # ================== RUN ==================
 if __name__ == "__main__":
@@ -132,5 +132,5 @@ if __name__ == "__main__":
 
     total_time = time.time() - start_time
 
-    print("\n✅ Done.")
-    print(f"⏰ Time: {total_time/60:.2f} minutes")
+    print("\n Done.")
+    print(f" Time: {total_time/60:.2f} minutes")
