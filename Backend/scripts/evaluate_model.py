@@ -30,12 +30,12 @@ test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num
 print("Class mapping:", test_loader.dataset.classes)
 print("Sample labels:", [test_loader.dataset[i][1] for i in range(10)])
 
-# 🔥 Verify class order matches training
-print(f"📌 Class mapping: {test_dataset.class_to_idx}")
+#  Verify class order matches training
+print(f" Class mapping: {test_dataset.class_to_idx}")
 
 expected = {'fake': 0, 'real': 1}
 if test_dataset.class_to_idx != expected:
-    print(f"⚠️ Warning: class mapping differs from expected {expected}")
+    print(f" Warning: class mapping differs from expected {expected}")
 
 # ================== MODEL LOADING ==================
 model = models.resnet18(weights=None)
@@ -44,15 +44,15 @@ model.fc = nn.Sequential(
     nn.Linear(model.fc.in_features, 2)
 )
 
-# 🔥 Safe model loading
+# Safe model loading
 if not os.path.exists(MODEL_PATH):
     raise FileNotFoundError(f"Model file not found: {MODEL_PATH}")
 
 model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
 model = model.to(DEVICE)
 model.eval()
-print(f"✅ Model loaded from: {MODEL_PATH}")
-print(f"🖥️ Running on: {DEVICE}\n")
+print(f" Model loaded from: {MODEL_PATH}")
+print(f" Running on: {DEVICE}\n")
 
 # ================== EVALUATION ==================
 all_preds = []
@@ -68,7 +68,7 @@ with torch.no_grad():
     for images, labels in test_loader:
         images, labels = images.to(DEVICE), labels.to(DEVICE)
 
-        # 🔥 TTA (horizontal + vertical)
+        #  TTA (horizontal + vertical)
         outputs1 = model(images)
 
         images_hflip = torch.flip(images, dims=[3])
@@ -77,10 +77,10 @@ with torch.no_grad():
         images_vflip = torch.flip(images, dims=[2])
         outputs3 = model(images_vflip)
 
-        # 🔥 weighted fusion (better than simple average)
+        #  weighted fusion (better than simple average)
         outputs = (outputs1 * 0.5 + outputs2 * 0.3 + outputs3 * 0.2)
 
-        # 🔥 probability sharpening
+        #  probability sharpening
         probs = torch.softmax(outputs, dim=1)
         probs = probs ** 1.2
         probs = probs / probs.sum(dim=1, keepdim=True)
@@ -98,8 +98,8 @@ prob_fake = all_probs[:, 0]
 best_acc = 0
 best_t = 0
 
-for t in np.arange(0.40, 0.65, 0.01):   # 🔥 slightly wider search
-    preds = (prob_fake * 0.95 <= t).astype(int)  # 🔥 bias correction
+for t in np.arange(0.40, 0.65, 0.01):   #  slightly wider search
+    preds = (prob_fake * 0.95 <= t).astype(int)  #  bias correction
 
     acc = (preds == all_labels).mean()
     print(f"Threshold {t:.2f}: Accuracy = {acc:.4f}")
@@ -108,14 +108,14 @@ for t in np.arange(0.40, 0.65, 0.01):   # 🔥 slightly wider search
         best_acc = acc
         best_t = t
 
-print(f"\n🔥 Best Threshold: {best_t:.2f} | Accuracy: {best_acc:.4f}")
+print(f"\n Best Threshold: {best_t:.2f} | Accuracy: {best_acc:.4f}")
 
 
 # ================== STEP 3: FINAL PREDICTIONS ==================
 all_preds = (prob_fake * 0.95 <= best_t).astype(int)
 
 # ================== METRICS ==================
-print("✅ Evaluation Complete!\n")
+print(" Evaluation Complete!\n")
 
 # 🔥 Safe class names fallback
 class_names = test_dataset.classes if test_dataset.classes else ["fake", "real"]
@@ -133,9 +133,9 @@ from sklearn.metrics import roc_auc_score
 
 # Assuming class index 1 is "real"
 auc = roc_auc_score(all_labels, all_probs[:, 1])
-print(f"📈 ROC-AUC: {auc:.4f}")
+print(f" ROC-AUC: {auc:.4f}")
 
-# 🔥 Per-class accuracy
+#  Per-class accuracy
 for i, cls in enumerate(class_names):
     mask = all_labels == i
     cls_acc = (all_preds[mask] == all_labels[mask]).mean() if mask.sum() > 0 else 0.0
@@ -146,11 +146,11 @@ for i, cls in enumerate(class_names):
 cm = confusion_matrix(all_labels, all_preds)
 report = classification_report(all_labels, all_preds, target_names=class_names, digits=4)
 
-print("\n📊 Confusion Matrix:\n", cm)
+print("\n Confusion Matrix:\n", cm)
 cm_norm = cm.astype(float) / cm.sum(axis=1, keepdims=True)
-print("\n📊 Normalized Confusion Matrix:\n", np.round(cm_norm, 4))
+print("\n Normalized Confusion Matrix:\n", np.round(cm_norm, 4))
 
-print("\n📋 Classification Report:\n", report)
+print("\n Classification Report:\n", report)
 
 
 os.makedirs("results", exist_ok=True)
@@ -162,4 +162,4 @@ with open("results/evaluation.txt", "w") as f:
     f.write("Classification Report:\n")
     f.write(report)
 
-print("💾 Results saved to results/evaluation.txt")
+print(" Results saved to results/evaluation.txt")
