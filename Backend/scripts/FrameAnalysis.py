@@ -117,7 +117,7 @@ def main():
             continue
 
         # ================= PROCESS LARGE GROUPS =================
-        print(f"\n🔍 Checking group: {key} ({len(vids)} videos)")
+        print(f"\n Checking group: {key} ({len(vids)} videos)")
 
         features = []  # (filename, size, duration, frames)
 
@@ -131,14 +131,14 @@ def main():
 
             for s_file, s_size, s_dur, s_frames in features:
 
-                # ⚡ FAST FILTER (skip heavy work)
+                #  FAST FILTER (skip heavy work)
                 size_close = abs(size - s_size) / max(size, s_size) < SIZE_TOL
                 dur_close = abs(duration - s_dur) < DUR_TOL
 
                 if not (size_close and dur_close):
                     continue
 
-                # 🧠 Only now extract frames
+                #  Only now extract frames
                 frames = extract_key_frames(path)
 
                 sim = compute_similarity(frames, s_frames)
@@ -156,7 +156,7 @@ def main():
                 moved += 1
 
     print("\n================ RESULT ================")
-    print(f"📦 Hard duplicates moved: {moved}")
+    print(f" Hard duplicates moved: {moved}")
 
 
 if __name__ == "__main__":
