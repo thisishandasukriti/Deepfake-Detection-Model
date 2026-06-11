@@ -16,7 +16,7 @@ def main():
     DATASET_DIR = "data/dataset"
     BATCH_SIZE = 64
     NUM_EPOCHS = 8
-    LEARNING_RATE = 7e-5   # 🔥 slightly reduced
+    LEARNING_RATE = 7e-5   #  slightly reduced
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
     NUM_WORKERS = 6
     IMAGE_SIZE = 224
@@ -31,7 +31,7 @@ def main():
         transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
         transforms.RandomHorizontalFlip(p=0.5),
 
-        # 🔥 stronger augmentation (important for val boost)
+        #  stronger augmentation (important for val boost)
         transforms.RandomApply([
             transforms.ColorJitter(brightness=0.1, contrast=0.1,
                                    saturation=0.1, hue=0.05)
@@ -102,7 +102,7 @@ def main():
         p.requires_grad = True
 
     model.fc = nn.Sequential(
-        nn.Dropout(0.4),   # 🔥 increased dropout
+        nn.Dropout(0.4),   #  increased dropout
         nn.Linear(model.fc.in_features, 2)
     )
 
@@ -111,14 +111,14 @@ def main():
     # ================== LOSS (IMPROVED) ==================
     criterion = nn.CrossEntropyLoss(
         weight=weights,
-        label_smoothing=0.02   # 🔥 major generalization boost
+        label_smoothing=0.02   #  major generalization boost
     )
 
     # ================== OPTIMIZER (IMPROVED) ==================
     optimizer = optim.AdamW(
         model.parameters(),
         lr=LEARNING_RATE,
-        weight_decay=1e-4   # 🔥 stronger regularization
+        weight_decay=1e-4   #  stronger regularization
     )
 
     # ================== SCHEDULER (BETTER THAN BEFORE) ==================
@@ -183,7 +183,7 @@ def main():
         if val_acc > best_val:
             best_val = val_acc
             torch.save(model.state_dict(), SAVE_MODEL_PATH)
-            print(f"🏆 Saved best model: {val_acc:.4f}")
+            print(f" Saved best model: {val_acc:.4f}")
 
     print(f"\nBest Validation Accuracy: {best_val:.4f}")
     print(f"Model saved at: {SAVE_MODEL_PATH}")
