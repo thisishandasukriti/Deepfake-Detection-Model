@@ -81,7 +81,7 @@ def gather_tasks():
         test_ids = video_ids[n_train + n_val:]
         return train_ids, val_ids, test_ids
 
-    # 🔥 Combine ALL video IDs (real + fake)
+    #  Combine ALL video IDs (real + fake)
     all_video_ids = set()
 
     for label in ("real", "fake"):
@@ -123,11 +123,11 @@ if __name__ == "__main__":
 
     tasks = gather_tasks()
     total_in = len(tasks)
-    print(f"📌 Total images to process: {total_in}")
+    print(f" Total images to process: {total_in}")
     print("Total Tasks:", len(tasks))
-    print(f"🧠 Using {NUM_WORKERS} parallel workers...\n")
+    print(f" Using {NUM_WORKERS} parallel workers...\n")
 
-    # 🔥 Pre-create all output directories before parallel loop
+    #  Pre-create all output directories before parallel loop
     for split_name in ("train", "val", "test"):
         for label in ("real", "fake"):
             ensure_dir(os.path.join(OUTPUT_DATASET, split_name, label))
@@ -147,7 +147,7 @@ if __name__ == "__main__":
             elif dst_path is not None:
                 total_out += 1
                 label = os.path.basename(os.path.dirname(src_path))
-                # 🔥 Fixed mapping CSV: correct label and split recorded
+                #  Fixed mapping CSV: correct label and split recorded
                 mapping_rows.append([dst_path, label, split_name, src_path])
 
             if i % PROGRESS_EVERY == 0 or i == total_in:
@@ -171,5 +171,5 @@ if __name__ == "__main__":
     print(f"Skipped (too small):         {skipped_small}")
     print(f"Skipped (read error):        {skipped_error}")
     print(f"Mapping CSV written to:      {mapping_csv_path}")
-    print(f"⏰ Total time: {(time.time() - start_time)/60:.2f} minutes")
-    print("✅ Preprocessing complete!")
+    print(f" Total time: {(time.time() - start_time)/60:.2f} minutes")
+    print(" Preprocessing complete!")
